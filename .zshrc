@@ -135,3 +135,4 @@ alias t='touch'
 export PATH="$PATH:/home/ff223/.local/bin"
 
 eval "$(zoxide init zsh)"
+eval "$(mcfly init zsh)"
