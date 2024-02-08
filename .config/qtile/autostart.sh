@@ -1,3 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
+# systray stuff
+blueman-applet &
 nm-applet

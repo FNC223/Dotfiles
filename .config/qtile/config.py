@@ -114,6 +114,28 @@ for i in groups:
         ]
         )
 
+# Scratchpads
+groups.append(
+    ScratchPad(
+        'scratchpad',
+        [
+            DropDown(
+                'term',
+                'kitty',
+                width=0.8,
+                height=0.75,
+                x=0.1,
+                y=0.1,
+                opacity=1
+            ) 
+                  ]
+    )
+)
+
+keys.extend([
+    Key([mod], "a", lazy.group['scratchpad'].dropdown_toggle('term')),
+])
+
 
 layouts = [
     layout.Columns(border_focus=color10, 
@@ -256,8 +278,7 @@ wl_input_rules = None
 subprocess.run(["xmodmap", "-e", "clear Lock", "-e", "keycode 0x42 = Escape"])
 
 # Autostart apps such as Network Manager Applet.
-@hook.subscribe.startup_once
-def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
-
+@ hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.run([home])
