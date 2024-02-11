@@ -193,6 +193,7 @@ vim.keymap.set('n', '<leader>fc', builtin.live_grep, {})
 
 -- Nerdtree Keybinds
 vim.keymap.set('n', '<leader>n', ':NERDTreeToggle<CR>')
+vim.o.scrolloff = 4
 
 
 
