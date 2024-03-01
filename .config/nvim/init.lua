@@ -49,6 +49,16 @@ require('lazy').setup({
   -- init.lua:
     {
     'nvim-telescope/telescope.nvim', tag = '0.1.3',
+    opts = {
+        defaults = {
+            vimgrep_arguments = {
+                "rg",
+                "--vimgrep",
+                "--hidden",
+                "--follow",
+            },
+        },
+    },
 -- or                              , branch = '0.1.x',
       dependencies = { 'nvim-lua/plenary.nvim' }
     },
@@ -61,7 +71,7 @@ require('lazy').setup({
     {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
-    opts = {} 
+    opts = {}
     },
     {
     'norcalli/nvim-colorizer.lua'
@@ -186,8 +196,21 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "S", ":%s//gI<Left><Left><Left>")
 vim.opt.wildmode = "longest,list,full"
 
--- Teles cope Keybinds
+-- Telescope Keybinds
 local builtin = require('telescope.builtin')
+local telescopeConfig = require("telescope.config")
+local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+-- I want to search in hidden/dot files.
+table.insert(vimgrep_arguments, "--hidden")
+-- I don't want to search in the `.git` directory.
+table.insert(vimgrep_arguments, "--glob")
+table.insert(vimgrep_arguments, "!**/.git/*")
+
+-- I want to follow symbolic links
+table.insert(vimgrep_arguments, "-L")
+
+
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fc', builtin.live_grep, {})
 

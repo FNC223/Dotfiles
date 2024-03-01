@@ -100,6 +100,7 @@ alias cd='z'
 alias du='dust'
 alias fd='fd -uuu'
 alias t='touch'
+alias gallery-dl='gallery-dl -o skip=true'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
